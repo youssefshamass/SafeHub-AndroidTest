@@ -5,6 +5,8 @@ package com.youssefshamass.core.errors
 
 class NetworkError : Exception()
 
+class NotFoundError: Exception()
+
 class GenericError(
         val code: Int?,
         validationMessage: String?,

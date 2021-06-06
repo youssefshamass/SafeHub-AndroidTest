@@ -5,6 +5,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.youssefshamass.core.database.DatabaseTransactionRunner
+import com.youssefshamass.core.errors.NotFoundError
 import com.youssefshamass.data.datasources.local.FollowingDAO
 import com.youssefshamass.data.datasources.local.UserDAO
 import com.youssefshamass.data.datasources.remote.UserService
@@ -52,7 +53,7 @@ class FollowingsRemoteMediator(
                 }
 
                 return MediatorResult.Success(endOfPaginationReached = response.size < 15)
-            } ?: throw Error("Invalid User Id Argument")
+            } ?: throw NotFoundError()
         } catch (exception: Exception) {
             return MediatorResult.Error(exception)
         }

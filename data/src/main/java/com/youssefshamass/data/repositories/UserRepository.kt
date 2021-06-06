@@ -6,9 +6,14 @@ import com.youssefshamass.data.datasources.local.UserDAO
 import com.youssefshamass.data.datasources.remote.UserService
 import com.youssefshamass.data.entities.local.User
 import com.youssefshamass.data.entities.mappers.GithubUserToUser
+import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 
 interface IUserRepository {
+    fun observeUser(userId: Int) : Flow<User?>
+
+    fun observePreviousMatches() : Flow<List<User>>
+
     suspend fun searchUser(loginName: String): User
 
     suspend fun refreshUser(loginName: String)
@@ -20,6 +25,12 @@ class UserRepository(
     private val userDao: UserDAO,
     private val userMapper: GithubUserToUser,
 ) : IUserRepository {
+    override fun observeUser(userId: Int): Flow<User?> =
+        userDao.observeUser(userId)
+
+    override fun observePreviousMatches(): Flow<List<User>> =
+        userDao.getMatches()
+
     override suspend fun searchUser(loginName: String): User {
         var persistedUser = userDao.getUser(loginName)
 

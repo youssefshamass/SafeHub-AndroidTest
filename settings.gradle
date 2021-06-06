@@ -2,3 +2,4 @@ include ':app'
 rootProject.name = "SafeHub"
 include ':core'
 include ':data'
+include ':domain'

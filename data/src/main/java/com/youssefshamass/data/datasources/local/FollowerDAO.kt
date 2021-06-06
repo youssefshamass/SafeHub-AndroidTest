@@ -9,6 +9,7 @@ import com.youssefshamass.data.entities.remote.UserHeader
 
 @Dao
 interface FollowerDAO : IDAO<Follower> {
+    @Query("SELECT * FROM user_followers WHERE user_id = :forUserId")
     fun paging(forUserId: Int): PagingSource<Int, UserHeader>
 
     @Query("DELETE FROM user_followers WHERE user_id = :forUserId")

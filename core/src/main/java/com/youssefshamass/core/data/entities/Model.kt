@@ -11,7 +11,4 @@ import kotlinx.android.parcel.Parcelize
 open class Model : Parcelable {
     @SerializedName("id")
     var id: Int? = null
-
-    @SerializedName("name")
-    var name: String? = null
 }

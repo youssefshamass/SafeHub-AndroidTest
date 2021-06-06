@@ -29,3 +29,7 @@ ext.libraries = [
         "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor_version",
         "com.squareup.picasso:picasso:$picasso_version",
 ]
+
+ext.compilers = [
+        "androidx.room:room-compiler:$room_version"
+]

@@ -1,0 +1,13 @@
+apply from: '../dependencies.gradle'
+
+ext.libraries = [
+        "androidx.activity:activity:$activity_version",
+        "androidx.activity:activity-ktx:$activity_version",
+        "androidx.fragment:fragment:$fragment_version",
+        "androidx.fragment:fragment-ktx:$fragment_version",
+        "androidx.recyclerview:recyclerview:$recycler_view_version",
+        "com.google.android.material:material:$material_version",
+        "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
+        "androidx.navigation:navigation-fragment-ktx:$navigation_version",
+        "androidx.navigation:navigation-ui-ktx:$navigation_version",
+]

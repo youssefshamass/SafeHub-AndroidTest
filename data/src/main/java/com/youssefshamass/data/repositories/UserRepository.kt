@@ -11,13 +11,13 @@ import retrofit2.HttpException
 import timber.log.Timber
 
 interface IUserRepository {
-    fun observeUser(userId: Int) : Flow<User?>
+    fun observeUser(userId: Int): Flow<User?>
 
-    fun observePreviousMatches() : Flow<List<User>>
+    fun observePreviousMatches(): Flow<List<User>>
 
     suspend fun searchUser(loginName: String): User
 
-    suspend fun refreshUser(loginName: String)
+    suspend fun refreshUser(userId: Int)
 }
 
 class UserRepository(
@@ -39,7 +39,7 @@ class UserRepository(
             try {
                 val remoteUser = userService.getUserDetails(loginName)
 
-                transactionRunner{
+                transactionRunner {
                     userDao.insert(userMapper.map(remoteUser))
                     persistedUser = userDao.getUser(loginName)
                 }
@@ -53,11 +53,13 @@ class UserRepository(
         return persistedUser!!
     }
 
-    override suspend fun refreshUser(loginName: String) {
-        val githubUser = userService.getUserDetails(loginName)
+    override suspend fun refreshUser(userId: Int) {
+        userDao.getUser(userId)?.let {
+            val githubUser = userService.getUserDetails(it.loginName)
 
-        transactionRunner.invoke {
-            userDao.insert(userMapper.map(githubUser))
+            transactionRunner.invoke {
+                userDao.insert(userMapper.map(githubUser))
+            }
         }
     }
 }

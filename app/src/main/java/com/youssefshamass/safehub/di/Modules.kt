@@ -2,6 +2,7 @@ package com.youssefshamass.safehub.di
 
 import com.google.gson.*
 import com.youssefshamass.safehub.BuildConfig
+import com.youssefshamass.safehub.presentation.details.UserDetailsViewModel
 import com.youssefshamass.safehub.presentation.home.HomeViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -48,5 +49,9 @@ val appModule = module {
 val viewModelModule = module {
     viewModel {
         HomeViewModel(get(), get())
+    }
+
+    viewModel { (userId: Int) ->
+        UserDetailsViewModel(userId, get(), get())
     }
 }

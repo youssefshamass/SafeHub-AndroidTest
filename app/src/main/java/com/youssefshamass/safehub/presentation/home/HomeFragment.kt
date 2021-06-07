@@ -23,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core_android.decorators.HorizontalSpaceDecorator
 import com.example.core_android.decorators.VerticalSpaceItemDecoration
+import com.google.android.material.transition.platform.MaterialFadeThrough
 import com.youssefshamass.data.entities.local.User
 import com.youssefshamass.safehub.R
 
@@ -35,6 +36,12 @@ class HomeFragment : Fragment() {
     private var _adapter: UserAdapter? = null
 
     //region Lifecycle members
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        enterTransition = MaterialFadeThrough()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -8,7 +8,5 @@ class NetworkError : Exception()
 class NotFoundError: Exception()
 
 class GenericError(
-        val code: Int?,
         validationMessage: String?,
-        val result: Result<*>? = null
 ) : Exception(validationMessage)

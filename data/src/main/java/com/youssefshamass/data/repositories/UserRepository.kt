@@ -8,6 +8,7 @@ import com.youssefshamass.data.entities.local.User
 import com.youssefshamass.data.entities.mappers.GithubUserToUser
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
+import timber.log.Timber
 
 interface IUserRepository {
     fun observeUser(userId: Int) : Flow<User?>
@@ -43,6 +44,7 @@ class UserRepository(
                     persistedUser = userDao.getUser(loginName)
                 }
             } catch (exception: Exception) {
+                Timber.e(exception)
                 if (exception is HttpException && exception.code() == 404)
                     throw NotFoundError()
             }

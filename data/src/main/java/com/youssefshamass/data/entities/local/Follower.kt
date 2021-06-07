@@ -1,9 +1,6 @@
 package com.youssefshamass.data.entities.local
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 
 @Entity(
@@ -13,7 +10,10 @@ import androidx.room.PrimaryKey
         parentColumns = ["id"],
         childColumns = ["user_id"],
         onDelete = ForeignKey.CASCADE
-    )]
+    )],
+    indices = [
+        Index("user_id")
+    ]
 )
 data class Follower(
     @PrimaryKey(autoGenerate = true)
@@ -25,6 +25,7 @@ data class Follower(
     @ColumnInfo(name = "avatar_image_url")
     val avatarImageUrl: String
 ) {
+    @Ignore
     constructor(userId: Int, loginName: String, avatarImageUrl: String) : this(
         0,
         userId,

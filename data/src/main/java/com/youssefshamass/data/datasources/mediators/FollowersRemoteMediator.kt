@@ -31,13 +31,16 @@ class FollowersRemoteMediator(
             user?.let {
                 val loadKey = when (loadType) {
                     LoadType.REFRESH -> null
-                    LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
+                    LoadType.PREPEND -> null
                     LoadType.APPEND -> {
                         val lastItem = state.anchorPosition ?: 0
 
                         if (lastItem > 0) (lastItem / 15.0).toInt() else null
                     }
                 }
+
+                if(loadType == LoadType.PREPEND)
+                    return MediatorResult.Success(endOfPaginationReached = true)
 
                 val response = userService.getFollowers(
                     user.loginName,

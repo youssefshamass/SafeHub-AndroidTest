@@ -19,13 +19,13 @@ data class User(
     @SerializedName("avatar_url")
     val avatarImageUrl: String,
     @SerializedName("name")
-    val displayName: String,
+    val displayName: String?,
     @SerializedName("company")
-    val companyName: String,
+    val companyName: String?,
     @SerializedName("location")
-    val location: String,
+    val location: String?,
     @SerializedName("bio")
-    val bio: String,
+    val bio: String?,
     @SerializedName("followers")
     val numberOfFollowers: Int,
     @SerializedName("following")

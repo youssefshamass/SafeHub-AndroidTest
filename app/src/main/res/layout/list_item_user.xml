@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.youssefshamass.data.entities.local.User" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_regular">
+
+            <TextView
+                android:id="@+id/text_view_login_name"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{user.loginName}"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/image_view_avatar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Login name" />
+
+            <TextView
+                android:id="@+id/text_view_bio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@{user.bio != null ? user.bio : @string/empty_bio}"
+                app:layout_constraintEnd_toEndOf="@id/text_view_login_name"
+                app:layout_constraintStart_toStartOf="@id/text_view_login_name"
+                app:layout_constraintTop_toBottomOf="@id/text_view_login_name"
+                tools:text="@string/empty_bio" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_view_avatar"
+                imageUrl="@{user.avatarImageUrl}"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearance.Rounded"
+                tools:src="@drawable/ic_launcher_background" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

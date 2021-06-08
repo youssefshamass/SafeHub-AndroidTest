@@ -23,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core_android.decorators.HorizontalSpaceDecorator
 import com.example.core_android.decorators.VerticalSpaceItemDecoration
+import com.example.core_android.extensions.bindToList
 import com.google.android.material.transition.platform.MaterialFadeThrough
 import com.youssefshamass.data.entities.local.User
 import com.youssefshamass.safehub.R
@@ -59,6 +60,7 @@ class HomeFragment : Fragment() {
         bindFabToSearchContainer()
         setupRecyclerView()
         attachListeners()
+        binding.fabSearch.bindToList(binding.recyclerViewRecentMatches)
 
         _viewModel.state.observe(this, ::render)
     }

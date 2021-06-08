@@ -6,7 +6,6 @@ import com.youssefshamass.core.errors.NotFoundError
 import com.youssefshamass.core.errors.RateLimitedError
 import com.youssefshamass.data.datasources.local.FollowerDAO
 import com.youssefshamass.data.datasources.local.FollowingDAO
-import com.youssefshamass.data.datasources.local.FollowingDAO_Impl
 import com.youssefshamass.data.datasources.local.UserDAO
 import com.youssefshamass.data.datasources.remote.UserService
 import com.youssefshamass.data.entities.local.Follower
@@ -15,7 +14,6 @@ import com.youssefshamass.data.entities.local.User
 import com.youssefshamass.data.entities.mappers.GithubUserToUser
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
-import timber.log.Timber
 
 interface IUserRepository {
     fun observeUser(userId: Int): Flow<User?>
@@ -46,6 +44,9 @@ class UserRepository(
         userDao.getMatches()
 
     override suspend fun searchUser(loginName: String): User {
+        if (loginName.isEmpty())
+            throw IllegalArgumentException()
+
         var persistedUser = userDao.getUser(loginName)
 
         if (persistedUser == null) {
@@ -73,7 +74,7 @@ class UserRepository(
         userDao.getUser(userId)?.let {
             val githubUser = userService.getUserDetails(it.loginName)
 
-            transactionRunner.invoke {
+            transactionRunner {
                 userDao.insert(userMapper.map(githubUser))
             }
         }

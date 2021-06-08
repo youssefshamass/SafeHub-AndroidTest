@@ -34,6 +34,7 @@ ext {
     junit_ktx_version = '1.1.2'
     mockito_kotlin_version = '2.2.0'
     mockito_version = '3.9.0'
+    mock_webserver_version = '4.7.2'
 }
 
 ext.testLibraries = [
@@ -41,8 +42,10 @@ ext.testLibraries = [
         "androidx.test.ext:junit-ktx:$junit_ktx_version",
         "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version",
         "org.mockito:mockito-core:$mockito_version",
+        "org.mockito:mockito-inline:$mockito_version",
         "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version",
         "androidx.test:runner:$test_version",
         "androidx.test:rules:$test_version",
-        "androidx.arch.core:core-testing:$core_version"
+        "androidx.arch.core:core-testing:$core_version",
+        "com.squareup.okhttp3:mockwebserver:$mock_webserver_version"
 ]

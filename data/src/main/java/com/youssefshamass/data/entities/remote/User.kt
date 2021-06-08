@@ -10,10 +10,12 @@ data class UserHeader(
     val loginName: String,
     @SerializedName("avatar_url")
     val avatarImageUrl: String
-): Model()
+) : Model()
 
 @Parcelize
 data class User(
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("login")
     val loginName: String,
     @SerializedName("avatar_url")

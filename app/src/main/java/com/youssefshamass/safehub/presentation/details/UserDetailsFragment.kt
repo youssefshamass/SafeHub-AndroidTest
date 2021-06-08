@@ -9,6 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.core_android.extensions.gone
+import com.example.core_android.extensions.visibile
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.transition.MaterialFadeThrough
 import com.youssefshamass.core.extensions.observe
@@ -65,10 +67,10 @@ class UserDetailsFragment : Fragment() {
         binding.tabLayoutListSource.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (tab?.id == R.id.tab_followers)
-                    _viewModel.updateDisplayState(DisplayState.followers)
+                if(tab?.position == 0)
+                    _viewModel.updateDisplayState(DisplayState.Followers)
                 else
-                    _viewModel.updateDisplayState(DisplayState.following)
+                    _viewModel.updateDisplayState(DisplayState.Following)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -80,12 +82,17 @@ class UserDetailsFragment : Fragment() {
     }
 
     private fun setupFollowersAndFollowingLists() {
-        _followingsAdapter = _followingsAdapter ?: UserHeaderAdapter()
         _followersAdapter = _followingsAdapter ?: UserHeaderAdapter()
+        _followingsAdapter = _followingsAdapter ?: UserHeaderAdapter()
 
-        binding.recyclerView.apply {
+        binding.recyclerViewFollowers.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = _followersAdapter
+        }
+
+        binding.recyclerViewFollowing.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = _followingsAdapter
         }
     }
 
@@ -103,14 +110,19 @@ class UserDetailsFragment : Fragment() {
 
         lifecycleScope.launch {
             _followersAdapter?.submitData(viewState.followers)
+            _followingsAdapter?.submitData(viewState.following)
         }
 
         viewState.displayState.onlyIfChanged {
             when (it) {
-                DisplayState.followers ->
-                    binding.recyclerView.adapter = _followersAdapter
-                DisplayState.following ->
-                    binding.recyclerView.adapter = _followingsAdapter
+                DisplayState.Followers ->{
+                    binding.recyclerViewFollowers.visibile()
+                    binding.recyclerViewFollowing.gone()
+                }
+                DisplayState.Following ->{
+                    binding.recyclerViewFollowers.gone()
+                    binding.recyclerViewFollowing.visibile()
+                }
             }
         }
     }

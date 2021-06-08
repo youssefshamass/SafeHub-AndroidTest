@@ -33,9 +33,7 @@ class FollowingsRemoteMediator(
                     LoadType.REFRESH -> null
                     LoadType.PREPEND -> null
                     LoadType.APPEND -> {
-                        val lastItem = state.anchorPosition ?: 0
-
-                        if (lastItem > 0) (lastItem / state.config.pageSize) + 1 else null
+                        state.pages.size + 1
                     }
                 }
 

@@ -36,18 +36,15 @@ class UserDetailsViewModel(
                 copy(user = it)
             }
         }
-        viewModelScope.launch {
-            refreshUser(RefreshUser.Parameters(userId))
-        }
 
         paginateFollowers(
             PaginateFollowers.Parameters(
                 forUserId = userId,
                 config = PagingConfig(
                     10,
-                    5,
+                    1,
                     false,
-                    initialLoadSize = 30
+                    initialLoadSize = 10
                 )
             )
         )
@@ -62,9 +59,9 @@ class UserDetailsViewModel(
                 forUserId = userId,
                 config = PagingConfig(
                     10,
-                    5,
+                    1,
                     false,
-                    initialLoadSize = 30,
+                    initialLoadSize = 10,
 
                 )
             )
@@ -87,10 +84,10 @@ data class UserDetailsViewState(
     val user: User? = null,
     val followers: PagingData<UserHeader> = PagingData.empty(),
     val following: PagingData<UserHeader> = PagingData.empty(),
-    val displayState: ViewStateBox<DisplayState> = ViewStateBox(DisplayState.followers)
+    val displayState: ViewStateBox<DisplayState> = ViewStateBox(DisplayState.Followers)
 )
 
 enum class DisplayState {
-    followers,
-    following
+    Followers,
+    Following
 }

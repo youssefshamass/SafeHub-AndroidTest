@@ -3,7 +3,6 @@ package com.youssefshamass.domain.users
 import androidx.paging.*
 import com.youssefshamass.core.interactors.PagingUseCase
 import com.youssefshamass.data.datasources.mediators.FollowingsRemoteMediator
-import com.youssefshamass.data.entities.local.Following
 import com.youssefshamass.data.repositories.IUserRepository
 import com.youssefshamass.domain.entities.UserHeader
 import com.youssefshamass.domain.mapper.FollowingToUserHeader

@@ -4,4 +4,9 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerRadius">32dp</item>
     </style>
+
+    <style name="ShapeAppearance.Circle" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

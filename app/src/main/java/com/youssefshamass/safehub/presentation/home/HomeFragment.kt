@@ -28,11 +28,12 @@ import com.youssefshamass.data.entities.local.User
 import com.youssefshamass.safehub.R
 
 class HomeFragment : Fragment() {
+    private val _viewModel: HomeViewModel by viewModel()
+
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
         get() = _binding!!
 
-    private val _viewModel: HomeViewModel by viewModel()
     private var _adapter: UserAdapter? = null
 
     //region Lifecycle members

@@ -55,7 +55,7 @@
             tools:text="Youssef Shamass" />
 
         <TextView
-            android:id="@+id/text_view_description"
+            android:id="@+id/text_view_bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_regular"
@@ -67,6 +67,15 @@
             app:layout_constraintTop_toBottomOf="@id/text_view_name"
             tools:text="@string/empty_bio" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_bio" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

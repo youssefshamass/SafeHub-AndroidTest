@@ -9,6 +9,7 @@ import com.youssefshamass.core.errors.NotFoundError
 import com.youssefshamass.data.datasources.local.FollowingDAO
 import com.youssefshamass.data.datasources.local.UserDAO
 import com.youssefshamass.data.datasources.remote.UserService
+import com.youssefshamass.data.entities.local.Following
 import com.youssefshamass.data.entities.mappers.GithubUserHeaderToFollowing
 import com.youssefshamass.data.entities.remote.UserHeader
 
@@ -20,10 +21,10 @@ class FollowingsRemoteMediator(
     private val followingsDao: FollowingDAO,
     private val userService: UserService,
     private val mapper: GithubUserHeaderToFollowing,
-) : RemoteMediator<Int, UserHeader>() {
+) : RemoteMediator<Int, Following>() {
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, UserHeader>
+        state: PagingState<Int, Following>
     ): MediatorResult {
         try {
             val user = userDao.getUser(forUserId)

@@ -1,19 +1,30 @@
 package com.youssefshamass.safehub.presentation.details
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.core_android.ReduxViewModel
-import com.youssefshamass.data.entities.local.Follower
-import com.youssefshamass.data.entities.local.Following
 import com.youssefshamass.data.entities.local.User
+import com.youssefshamass.domain.entities.UserHeader
 import com.youssefshamass.domain.users.ObserveUser
+import com.youssefshamass.domain.users.PaginateFollowers
+import com.youssefshamass.domain.users.PaginateFollowings
 import com.youssefshamass.domain.users.RefreshUser
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinApiExtension
 
+@KoinApiExtension
+@ExperimentalCoroutinesApi
+@ExperimentalPagingApi
 class UserDetailsViewModel(
     private val userId: Int,
     private val observeUser: ObserveUser,
     private val refreshUser: RefreshUser,
+    private val paginateFollowings: PaginateFollowings,
+    private val paginateFollowers: PaginateFollowers
 ) : ReduxViewModel<UserDetailsViewState>(
     UserDetailsViewState()
 ) {
@@ -24,15 +35,46 @@ class UserDetailsViewModel(
                 copy(user = it)
             }
         }
-
         viewModelScope.launch {
             refreshUser(RefreshUser.Parameters(userId))
+        }
+
+        paginateFollowers(
+            PaginateFollowers.Parameters(
+                forUserId = userId,
+                config = PagingConfig(
+                    15,
+                    30,
+                    false
+                )
+            )
+        )
+        viewModelScope.launch {
+            paginateFollowers.observe().cachedIn(viewModelScope).collectAndSetState {
+                copy(followers = it)
+            }
+        }
+
+        paginateFollowings(
+            PaginateFollowings.Parameters(
+                forUserId = userId,
+                config = PagingConfig(
+                    15,
+                    30,
+                    false
+                )
+            )
+        )
+        viewModelScope.launch {
+            paginateFollowings.observe().cachedIn(viewModelScope).collectAndSetState {
+                copy(following = it)
+            }
         }
     }
 }
 
 data class UserDetailsViewState(
     val user: User? = null,
-    val followers: PagingData<Follower>? = null,
-    val following: PagingData<Following>? = null
+    val followers: PagingData<UserHeader> = PagingData.empty(),
+    val following: PagingData<UserHeader> = PagingData.empty()
 )

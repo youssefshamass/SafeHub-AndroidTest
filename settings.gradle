@@ -3,3 +3,4 @@ rootProject.name = "SafeHub"
 include ':core'
 include ':data'
 include ':domain'
+include ':core-android'

@@ -11,13 +11,13 @@ data class User(
     @ColumnInfo(name = "avatar_image_url")
     val avatarImageUrl: String,
     @ColumnInfo(name = "display_name")
-    val displayName: String,
+    val displayName: String?,
     @ColumnInfo(name = "company_name")
-    val companyName: String,
+    val companyName: String?,
     @ColumnInfo(name = "location")
-    val location: String,
+    val location: String?,
     @ColumnInfo(name = "bio")
-    val bio: String,
+    val bio: String?,
     @ColumnInfo(name = "number_of_followers", defaultValue = "0")
     val numberOfFollowers: Int = 0,
     @ColumnInfo(name = "number_of_followings", defaultValue = "0")

@@ -1,6 +1,7 @@
 package com.youssefshamass.data.db
 
 import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.youssefshamass.data.datasources.local.FollowerDAO
 import com.youssefshamass.data.datasources.local.FollowingDAO
 import com.youssefshamass.data.datasources.local.UserDAO
@@ -18,7 +19,7 @@ import com.youssefshamass.data.entities.local.User
     exportSchema = false
 )
 
-abstract class ApplicationDatabase {
+abstract class ApplicationDatabase : RoomDatabase() {
     abstract fun users() : UserDAO
     abstract fun followers() : FollowerDAO
     abstract fun followings() : FollowingDAO

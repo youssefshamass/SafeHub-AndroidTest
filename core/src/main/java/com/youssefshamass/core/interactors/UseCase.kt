@@ -33,13 +33,11 @@ abstract class UseCase<I : Any, O> {
                     is GenericError -> emit(InvokeStatus.Error<O>(error))
                     is IOException -> emit(InvokeStatus.Error<O>(NetworkError()))
                     is HttpException -> {
-                        val code = error.code()
                         val message = error.message()
                             ?: "Something wrong happened, please try again in few moments"
                         emit(
                             InvokeStatus.Error<O>(
                                 GenericError(
-                                    code,
                                     message
                                 )
                             )

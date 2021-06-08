@@ -9,8 +9,8 @@ import com.youssefshamass.core.errors.NotFoundError
 import com.youssefshamass.data.datasources.local.FollowerDAO
 import com.youssefshamass.data.datasources.local.UserDAO
 import com.youssefshamass.data.datasources.remote.UserService
+import com.youssefshamass.data.entities.local.Follower
 import com.youssefshamass.data.entities.mappers.GithubUserHeaderToFollower
-import com.youssefshamass.data.entities.remote.UserHeader
 
 @ExperimentalPagingApi
 class FollowersRemoteMediator(
@@ -20,10 +20,10 @@ class FollowersRemoteMediator(
     private val followersDao: FollowerDAO,
     private val userService: UserService,
     private val mapper: GithubUserHeaderToFollower,
-) : RemoteMediator<Int, UserHeader>() {
+) : RemoteMediator<Int, Follower>() {
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, UserHeader>
+        state: PagingState<Int, Follower>
     ): MediatorResult {
         try {
             val user = userDao.getUser(forUserId)
@@ -31,17 +31,19 @@ class FollowersRemoteMediator(
             user?.let {
                 val loadKey = when (loadType) {
                     LoadType.REFRESH -> null
-                    LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
+                    LoadType.PREPEND -> null
                     LoadType.APPEND -> {
-                        val lastItem = state.anchorPosition ?: 0
-
-                        if (lastItem > 0) (lastItem / 15.0).toInt() else null
+                        state.pages.size + 1
                     }
                 }
 
+                if(loadType == LoadType.PREPEND)
+                    return MediatorResult.Success(endOfPaginationReached = true)
+
                 val response = userService.getFollowers(
                     user.loginName,
-                    page = loadKey ?: 1
+                    page = loadKey ?: 1,
+                    pageSize = state.config.pageSize
                 )
 
                 transactionRunner {
@@ -52,7 +54,7 @@ class FollowersRemoteMediator(
                     followersDao.insert(*mapper.collection(response).toTypedArray())
                 }
 
-                return MediatorResult.Success(endOfPaginationReached = response.size < 15)
+                return MediatorResult.Success(endOfPaginationReached = response.size < state.config.pageSize)
             } ?: throw NotFoundError()
         } catch (exception: Exception) {
             return MediatorResult.Error(exception)

@@ -7,8 +7,8 @@ class NetworkError : Exception()
 
 class NotFoundError: Exception()
 
+class RateLimitedError: Exception()
+
 class GenericError(
-        val code: Int?,
         validationMessage: String?,
-        val result: Result<*>? = null
 ) : Exception(validationMessage)

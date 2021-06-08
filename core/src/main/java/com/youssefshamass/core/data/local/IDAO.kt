@@ -14,7 +14,4 @@ interface IDAO<T> {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(model: T)
-
-    @Delete
-    suspend fun delete(model: T)
 }

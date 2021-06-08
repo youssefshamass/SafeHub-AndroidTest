@@ -15,8 +15,6 @@ abstract class PagingUseCase<P : PagingUseCase.Parameters, T : Any>
         val config: PagingConfig
     }
 
-    var pagingSource: PagingSource<Int,T>? = null
-
     override fun invoke(parameters: P?) {
         try {
             super.invoke(parameters)
@@ -24,15 +22,6 @@ abstract class PagingUseCase<P : PagingUseCase.Parameters, T : Any>
             Timber.e(exception)
         }
     }
-
-    abstract fun initPager(parameters: P?): PagingSource<Int, T>
-
-    override fun createObservable(parameters: P?): Flow<PagingData<T>> =
-            Pager(config = parameters!!.config) {
-                initPager(parameters).also {
-                    pagingSource = it
-                }
-            }.flow
 
     fun refresh(parameters: P?) {
         paramState.value = parameters

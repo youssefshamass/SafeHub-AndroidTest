@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 apply from: './dependencies.gradle'
 
 android {
@@ -31,9 +33,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
 }
 
 dependencies {
-    api project(':domain')
+    api project(':core-android')
     implementation libraries
 }

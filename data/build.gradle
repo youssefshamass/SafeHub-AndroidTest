@@ -33,6 +33,13 @@ android {
         jvmTarget = '1.8'
         freeCompilerArgs = freeCompilerArgs + "-Xallow-result-return-type"
     }
+
+    packagingOptions {
+        exclude "**/attach_hotspot_windows.dll"
+        exclude "META-INF/licenses/**"
+        exclude "META-INF/AL2.0"
+        exclude "META-INF/LGPL2.1"
+    }
 }
 
 dependencies {
@@ -41,4 +48,9 @@ dependencies {
 
     kapt "org.xerial:sqlite-jdbc:3.34.0"
     kapt "androidx.room:room-compiler:$room_version"
+
+    testImplementation testLibraries
+    testImplementation project(':core')
+    androidTestImplementation testLibraries
+    androidTestImplementation project(':core')
 }

@@ -26,7 +26,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{user.loginName}"
-                android:textColor="@color/black"
+                android:textColor="?colorOnSurface"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/image_view_avatar"
                 app:layout_constraintStart_toStartOf="parent"

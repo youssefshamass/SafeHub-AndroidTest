@@ -9,8 +9,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.transition.MaterialFadeThrough
 import com.youssefshamass.core.extensions.observe
+import com.youssefshamass.safehub.R
 import com.youssefshamass.safehub.databinding.FragmentUserDetailsBinding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -53,12 +55,32 @@ class UserDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupFollowersRecyclerView()
+        setupTabLayout()
+        setupFollowersAndFollowingLists()
 
         _viewModel.state.observe(this, ::render)
     }
 
-    private fun setupFollowersRecyclerView() {
+    private fun setupTabLayout() {
+        binding.tabLayoutListSource.addOnTabSelectedListener(object :
+            TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab?.id == R.id.tab_followers)
+                    _viewModel.updateDisplayState(DisplayState.followers)
+                else
+                    _viewModel.updateDisplayState(DisplayState.following)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
+    }
+
+    private fun setupFollowersAndFollowingLists() {
+        _followingsAdapter = _followingsAdapter ?: UserHeaderAdapter()
         _followersAdapter = _followingsAdapter ?: UserHeaderAdapter()
 
         binding.recyclerView.apply {
@@ -81,6 +103,15 @@ class UserDetailsFragment : Fragment() {
 
         lifecycleScope.launch {
             _followersAdapter?.submitData(viewState.followers)
+        }
+
+        viewState.displayState.onlyIfChanged {
+            when (it) {
+                DisplayState.followers ->
+                    binding.recyclerView.adapter = _followersAdapter
+                DisplayState.following ->
+                    binding.recyclerView.adapter = _followingsAdapter
+            }
         }
     }
 

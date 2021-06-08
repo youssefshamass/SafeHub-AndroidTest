@@ -3,6 +3,7 @@ package com.youssefshamass.data.repositories
 import androidx.paging.PagingSource
 import com.youssefshamass.core.database.DatabaseTransactionRunner
 import com.youssefshamass.core.errors.NotFoundError
+import com.youssefshamass.core.errors.RateLimitedError
 import com.youssefshamass.data.datasources.local.FollowerDAO
 import com.youssefshamass.data.datasources.local.FollowingDAO
 import com.youssefshamass.data.datasources.local.FollowingDAO_Impl
@@ -25,9 +26,9 @@ interface IUserRepository {
 
     suspend fun refreshUser(userId: Int)
 
-    fun getFollowersPagingSource(userId: Int) : PagingSource<Int, Follower>
+    fun getFollowersPagingSource(userId: Int): PagingSource<Int, Follower>
 
-    fun getFollowingsPagingSource(userId: Int) : PagingSource<Int, Following>
+    fun getFollowingsPagingSource(userId: Int): PagingSource<Int, Following>
 }
 
 class UserRepository(
@@ -56,9 +57,12 @@ class UserRepository(
                     persistedUser = userDao.getUser(loginName)
                 }
             } catch (exception: Exception) {
-                Timber.e(exception)
-                if (exception is HttpException && exception.code() == 404)
-                    throw NotFoundError()
+                if (exception is HttpException)
+                    when (exception.code()) {
+                        404 -> throw NotFoundError()
+                        403 -> throw RateLimitedError()
+                    }
+                throw exception
             }
         }
 

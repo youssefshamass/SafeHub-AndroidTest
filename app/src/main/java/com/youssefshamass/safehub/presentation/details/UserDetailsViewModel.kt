@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.core_android.ReduxViewModel
+import com.youssefshamass.core.utils.ViewStateBox
 import com.youssefshamass.data.entities.local.User
 import com.youssefshamass.domain.entities.UserHeader
 import com.youssefshamass.domain.users.ObserveUser
@@ -43,9 +44,10 @@ class UserDetailsViewModel(
             PaginateFollowers.Parameters(
                 forUserId = userId,
                 config = PagingConfig(
-                    15,
-                    30,
-                    false
+                    10,
+                    5,
+                    false,
+                    initialLoadSize = 30
                 )
             )
         )
@@ -59,9 +61,11 @@ class UserDetailsViewModel(
             PaginateFollowings.Parameters(
                 forUserId = userId,
                 config = PagingConfig(
-                    15,
-                    30,
-                    false
+                    10,
+                    5,
+                    false,
+                    initialLoadSize = 30,
+
                 )
             )
         )
@@ -71,10 +75,22 @@ class UserDetailsViewModel(
             }
         }
     }
+
+    fun updateDisplayState(displayState: DisplayState) {
+        viewModelScope.launchSetState {
+            copy(displayState = ViewStateBox(displayState))
+        }
+    }
 }
 
 data class UserDetailsViewState(
     val user: User? = null,
     val followers: PagingData<UserHeader> = PagingData.empty(),
-    val following: PagingData<UserHeader> = PagingData.empty()
+    val following: PagingData<UserHeader> = PagingData.empty(),
+    val displayState: ViewStateBox<DisplayState> = ViewStateBox(DisplayState.followers)
 )
+
+enum class DisplayState {
+    followers,
+    following
+}

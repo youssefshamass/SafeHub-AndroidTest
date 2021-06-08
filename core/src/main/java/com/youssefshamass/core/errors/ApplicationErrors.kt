@@ -7,6 +7,8 @@ class NetworkError : Exception()
 
 class NotFoundError: Exception()
 
+class RateLimitedError: Exception()
+
 class GenericError(
         validationMessage: String?,
 ) : Exception(validationMessage)

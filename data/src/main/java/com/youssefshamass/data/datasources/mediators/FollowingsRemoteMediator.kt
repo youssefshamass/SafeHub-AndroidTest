@@ -11,7 +11,6 @@ import com.youssefshamass.data.datasources.local.UserDAO
 import com.youssefshamass.data.datasources.remote.UserService
 import com.youssefshamass.data.entities.local.Following
 import com.youssefshamass.data.entities.mappers.GithubUserHeaderToFollowing
-import com.youssefshamass.data.entities.remote.UserHeader
 
 @ExperimentalPagingApi
 class FollowingsRemoteMediator(
@@ -36,16 +35,17 @@ class FollowingsRemoteMediator(
                     LoadType.APPEND -> {
                         val lastItem = state.anchorPosition ?: 0
 
-                        if (lastItem > 0) (lastItem / 15.0).toInt() else null
+                        if (lastItem > 0) (lastItem / state.config.pageSize) + 1 else null
                     }
                 }
 
-                if(loadType == LoadType.PREPEND)
+                if (loadType == LoadType.PREPEND)
                     return MediatorResult.Success(endOfPaginationReached = true)
 
                 val response = userService.getFollowings(
                     user.loginName,
-                    page = loadKey ?: 1
+                    page = loadKey ?: 1,
+                    pageSize = state.config.pageSize
                 )
 
                 transactionRunner {
@@ -56,7 +56,7 @@ class FollowingsRemoteMediator(
                     followingsDao.insert(*mapper.collection(response).toTypedArray())
                 }
 
-                return MediatorResult.Success(endOfPaginationReached = response.size < 15)
+                return MediatorResult.Success(endOfPaginationReached = response.size < state.config.pageSize)
             } ?: throw NotFoundError()
         } catch (exception: Exception) {
             return MediatorResult.Error(exception)

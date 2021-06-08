@@ -10,7 +10,7 @@ interface UserService {
     @GET("users/{login_name}")
     suspend fun getUserDetails(@Path("login_name") loginName: String): User
 
-    @GET("users/{login_name}/followers")
+    @GET("users/{login_name}/following")
     suspend fun getFollowings(
         @Path("login_name") loginName: String,
         @Query("page") page: Int = 1,

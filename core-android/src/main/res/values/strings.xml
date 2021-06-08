@@ -4,4 +4,6 @@
     <string name="search">Search</string>
     <string name="github_login_name_hint">Enter GitHub Login name</string>
     <string name="empty_bio">Apparently, this user prefers to keep an air of mystery about them</string>
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
 </resources>

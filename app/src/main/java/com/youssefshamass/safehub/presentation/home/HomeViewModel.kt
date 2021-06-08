@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.core_android.ReduxViewModel
 import com.youssefshamass.core.data.base.InvokeStatus
 import com.youssefshamass.core.errors.NotFoundError
+import com.youssefshamass.core.errors.RateLimitedError
 import com.youssefshamass.core.extensions.exhaustive
 import com.youssefshamass.core.utils.ViewStateBox
 import com.youssefshamass.data.entities.local.User
@@ -35,6 +36,12 @@ class HomeViewModel(
                                 errorMessage = ViewStateBox("Not found"),
                                 isLoading = false
                             )
+                        else if (it.error is RateLimitedError)
+                            copy(
+                                errorMessage = ViewStateBox("Oops, We've been rate limited," +
+                                        " Please wait an hour before trying the app again"),
+                                isLoading = false
+                            )
                         else
                             copy(
                                 errorMessage = ViewStateBox(it.error.message),
@@ -46,7 +53,8 @@ class HomeViewModel(
                         errorMessage = null
                     )
                     is InvokeStatus.Success -> copy(
-                        match = ViewStateBox(it.data)
+                        match = ViewStateBox(it.data),
+                        isLoading = false
                     )
                 }.exhaustive
             }

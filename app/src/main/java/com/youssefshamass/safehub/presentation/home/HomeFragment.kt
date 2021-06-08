@@ -114,6 +114,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.buttonSearch.setOnClickListener {
+            hideKeyboard(requireActivity())
             invokeSearch()
         }
     }

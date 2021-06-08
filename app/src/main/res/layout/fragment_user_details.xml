@@ -67,15 +67,36 @@
             app:layout_constraintTop_toBottomOf="@id/text_view_name"
             tools:text="@string/empty_bio" />
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_list_source"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_view_bio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_followers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/followers"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_following"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/following"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/spacing_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_bio" />
+            app:layout_constraintTop_toBottomOf="@id/tab_layout_list_source" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

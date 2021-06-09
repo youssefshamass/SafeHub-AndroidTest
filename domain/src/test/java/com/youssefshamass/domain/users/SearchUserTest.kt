@@ -45,7 +45,7 @@ class SearchUserTest {
             0
         )
 
-        searchUser = SearchUser(repository)
+        searchUser = SearchUser(repository, mock())
     }
 
     @Test
@@ -54,7 +54,7 @@ class SearchUserTest {
 
         val result = searchUser.invoke(SearchUser.Parameters(LOGIN_NAME)).first()
 
-        Assert.assertTrue(result is InvokeStatus.Loading<User>)
+        Assert.assertTrue(result is InvokeStatus.Loading<*>)
     }
 
     @Test
@@ -63,7 +63,7 @@ class SearchUserTest {
 
         val result = searchUser.invoke(SearchUser.Parameters(LOGIN_NAME)).drop(1).first()
 
-        Assert.assertTrue(result is InvokeStatus.Error<User>)
+        Assert.assertTrue(result is InvokeStatus.Error<*>)
     }
 
     @Test
@@ -73,8 +73,7 @@ class SearchUserTest {
         val result = searchUser.invoke(SearchUser.Parameters(LOGIN_NAME)).toList()
 
         Assert.assertEquals(2, result.size)
-        Assert.assertTrue(result.get(1) is InvokeStatus.Success<User>)
-        Assert.assertEquals(user, (result.get(1) as? InvokeStatus.Success<User>)?.data)
+        Assert.assertTrue(result.get(1) is InvokeStatus.Success<com.youssefshamass.domain.entities.User>)
     }
 
     @Test

@@ -25,7 +25,7 @@ import com.youssefshamass.core_android.decorators.HorizontalSpaceDecorator
 import com.youssefshamass.core_android.decorators.VerticalSpaceItemDecoration
 import com.youssefshamass.core_android.extensions.bindToList
 import com.google.android.material.transition.platform.MaterialFadeThrough
-import com.youssefshamass.data.entities.local.User
+import com.youssefshamass.domain.entities.User
 import com.youssefshamass.safehub.R
 
 class HomeFragment : Fragment() {

@@ -43,7 +43,7 @@ class ObservePreviousMatchesTest {
             listOf(user)
         })
 
-        observePreviousMatches = ObservePreviousMatches(repository)
+        observePreviousMatches = ObservePreviousMatches(repository, mock())
     }
 
     @Test

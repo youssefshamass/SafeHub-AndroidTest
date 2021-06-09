@@ -3,7 +3,7 @@ package com.youssefshamass.safehub.presentation.details
 import androidx.paging.ExperimentalPagingApi
 import com.nhaarman.mockitokotlin2.*
 import com.youssefshamass.core_test.CoroutineTestRule
-import com.youssefshamass.data.entities.local.User
+import com.youssefshamass.domain.entities.User
 import com.youssefshamass.domain.users.ObserveUser
 import com.youssefshamass.domain.users.RefreshUser
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -35,8 +35,6 @@ class UserDetailsViewModelTest {
             "http://example.com",
             "Youssef shamass",
             "-",
-            "Damascus - Syria",
-            "Bio",
             0,
             0
         )

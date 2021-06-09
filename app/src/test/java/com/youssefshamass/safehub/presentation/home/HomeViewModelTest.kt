@@ -3,7 +3,7 @@ package com.youssefshamass.safehub.presentation.home
 import com.nhaarman.mockitokotlin2.*
 import com.youssefshamass.core.data.base.InvokeStatus
 import com.youssefshamass.core_test.CoroutineTestRule
-import com.youssefshamass.data.entities.local.User
+import com.youssefshamass.domain.entities.User
 import com.youssefshamass.domain.users.ObservePreviousMatches
 import com.youssefshamass.domain.users.SearchUser
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -40,8 +40,6 @@ class HomeViewModelTest {
             "http://example.com",
             "Youssef shamass",
             "-",
-            "Damascus - Syria",
-            "Bio",
             0,
             0
         )

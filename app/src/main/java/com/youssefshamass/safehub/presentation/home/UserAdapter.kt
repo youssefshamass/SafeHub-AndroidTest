@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.youssefshamass.data.entities.local.User
+import com.youssefshamass.domain.entities.User
 import com.youssefshamass.safehub.databinding.ListItemUserBinding
 
 class UserAdapter(private val onClickListener: (User) -> Unit) :

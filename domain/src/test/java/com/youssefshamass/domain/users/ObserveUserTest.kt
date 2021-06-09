@@ -50,7 +50,7 @@ class ObserveUserTest {
 
         })
 
-        observeUser = ObserveUser(repository)
+        observeUser = ObserveUser(repository, mock())
     }
 
     @Test

@@ -42,5 +42,8 @@ android {
 
 dependencies {
     api project(':core-android')
+
     implementation libraries
+    testImplementation testLibraries
+    androidTestImplementation testLibraries
 }

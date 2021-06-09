@@ -5,7 +5,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.core_android.ReduxViewModel
+import com.youssefshamass.core_android.ReduxViewModel
 import com.youssefshamass.core.utils.ViewStateBox
 import com.youssefshamass.data.entities.local.User
 import com.youssefshamass.domain.entities.UserHeader

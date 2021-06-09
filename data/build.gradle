@@ -24,15 +24,6 @@ android {
         }
     }
 
-    sourceSets {
-        androidTest {
-            java.srcDir project(":core-test").file("src/androidTest/java")
-        }
-        test {
-            java.srcDir project(":core-test").file("src/test/java")
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -59,7 +50,5 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     testImplementation testLibraries
-    testImplementation project(':core')
     androidTestImplementation testLibraries
-    androidTestImplementation project(':core')
 }

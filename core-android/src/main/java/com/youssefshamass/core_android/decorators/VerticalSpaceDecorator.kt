@@ -1,4 +1,4 @@
-package com.example.core_android.decorators
+package com.youssefshamass.core_android.decorators
 
 import android.graphics.Rect
 import android.view.View

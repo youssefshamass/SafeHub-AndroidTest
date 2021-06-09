@@ -1,4 +1,4 @@
-package com.example.core_android.extensions
+package com.youssefshamass.core_android.extensions
 
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity

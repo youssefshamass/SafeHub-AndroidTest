@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.youssefshamass.core_test.utils.CoroutineTestRule
 import com.youssefshamass.data.db.ApplicationDatabase
 import com.youssefshamass.data.entities.local.User
+import com.youssefshamass.data.utils.InstrumentationTestCoroutineScopeRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -22,7 +22,7 @@ class UserDAOTest {
     private lateinit var user: User
 
     @get:Rule
-    var coroutinesTestRule = CoroutineTestRule()
+    var coroutinesTestRule = InstrumentationTestCoroutineScopeRule()
 
     @Before
     fun setupDatabase() {

@@ -9,8 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.core_android.extensions.gone
-import com.example.core_android.extensions.visibile
+import com.youssefshamass.core_android.extensions.gone
+import com.youssefshamass.core_android.extensions.visibile
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.transition.MaterialFadeThrough
 import com.youssefshamass.core.extensions.observe

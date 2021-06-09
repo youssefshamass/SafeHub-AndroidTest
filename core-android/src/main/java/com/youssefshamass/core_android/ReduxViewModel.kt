@@ -1,7 +1,7 @@
 /*
  * Designed and developed by 2020 Youssef Shamass
  */
-package com.example.core_android
+package com.youssefshamass.core_android
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

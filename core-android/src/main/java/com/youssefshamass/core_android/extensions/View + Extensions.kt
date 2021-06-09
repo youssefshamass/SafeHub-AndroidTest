@@ -1,4 +1,4 @@
-package com.example.core_android.extensions
+package com.youssefshamass.core_android.extensions
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

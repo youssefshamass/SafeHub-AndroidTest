@@ -1,7 +1,7 @@
 package com.youssefshamass.safehub.presentation.home
 
 import androidx.lifecycle.viewModelScope
-import com.example.core_android.ReduxViewModel
+import com.youssefshamass.core_android.ReduxViewModel
 import com.youssefshamass.core.data.base.InvokeStatus
 import com.youssefshamass.core.errors.NotFoundError
 import com.youssefshamass.core.errors.RateLimitedError

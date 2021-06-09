@@ -69,7 +69,7 @@ class FollowerDAOTest {
 
         val numberOfDeletedRows = followerDao.clear(user.id)
 
-        Assert.assertEquals(numberOfDeletedRows, 5)
+        Assert.assertEquals(5, numberOfDeletedRows)
     }
 
 }

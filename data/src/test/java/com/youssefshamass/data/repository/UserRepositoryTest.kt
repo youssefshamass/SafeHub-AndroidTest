@@ -17,7 +17,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 import retrofit2.HttpException
 
-const val LOGIN_NAME = "test"
+const val LOGIN_NAME = "chrisbanes"
 
 class UserRepositoryTest {
     private val userService = mock<UserService>()
@@ -58,7 +58,7 @@ class UserRepositoryTest {
 
             val returnValue = repository.searchUser(LOGIN_NAME)
 
-            Assert.assertEquals(returnValue, user)
+            Assert.assertEquals(user, returnValue)
             verify(userService, times(0)).getUserDetails(any())
             verify(userDao, times(1)).getUser(loginName = any())
         }
@@ -91,7 +91,7 @@ class UserRepositoryTest {
 
         val returnValue = repository.searchUser(LOGIN_NAME)
 
-        Assert.assertEquals(returnValue, user)
+        Assert.assertEquals(user, returnValue)
         verify(userDao, times(2)).getUser(anyString())
         verify(userService, times(1)).getUserDetails(anyString())
     }

@@ -15,13 +15,11 @@ import java.util.concurrent.TimeUnit
 
 abstract class UseCase<I : Any, O> {
     operator fun invoke(
-        parameters: I?,
+        parameters: I,
         timeoutMS: Long = DEFAULT_TIMEOUT_MS
     ): Flow<InvokeStatus<O>> {
         return flow {
             emit(InvokeStatus.Loading<O>())
-            /*try {
-                withTimeout(timeoutMS) {*/
             try {
                 val response = doWork(parameters)
 
@@ -47,16 +45,12 @@ abstract class UseCase<I : Any, O> {
                 }
             }
         }
-        /*} catch (t: TimeoutCancellationException) {
-                emit(InvokeStatus.Error<O>(t, "Timeout expired"))
-            }
-    }*/
     }
 
-    suspend fun execSync(parameters: I?): O? =
+    suspend fun execSync(parameters: I): O =
         doWork(parameters)
 
-    protected abstract suspend fun doWork(parameters: I?): O?
+    protected abstract suspend fun doWork(parameters: I): O
 
     companion object {
         private val DEFAULT_TIMEOUT_MS = TimeUnit.MINUTES.toMillis(3)

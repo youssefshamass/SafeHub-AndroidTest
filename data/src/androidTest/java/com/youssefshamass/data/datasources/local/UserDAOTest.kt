@@ -59,7 +59,7 @@ class UserDAOTest {
 
         val firstUser = userDao.getMatches().first().first()
 
-        Assert.assertEquals(firstUser.loginName, user.loginName)
+        Assert.assertEquals(user.loginName, firstUser.loginName)
     }
 
     @Test
@@ -68,7 +68,7 @@ class UserDAOTest {
 
         val firstUser = userDao.getUser(id.toInt())
 
-        Assert.assertEquals(firstUser, user)
+        Assert.assertEquals(user, firstUser)
     }
 
     @Test
@@ -77,6 +77,6 @@ class UserDAOTest {
 
         val firstUser = userDao.getUser(user.loginName)
 
-        Assert.assertEquals(firstUser, user)
+        Assert.assertEquals(user, firstUser)
     }
 }

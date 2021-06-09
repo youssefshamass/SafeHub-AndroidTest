@@ -20,6 +20,7 @@ interface IUserRepository {
 
     fun observePreviousMatches(): Flow<List<User>>
 
+    @Throws(NotFoundError::class, RateLimitedError::class)
     suspend fun searchUser(loginName: String): User
 
     suspend fun refreshUser(userId: Int)

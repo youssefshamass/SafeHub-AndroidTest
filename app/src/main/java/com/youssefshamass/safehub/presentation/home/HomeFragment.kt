@@ -10,8 +10,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import com.example.core_android.extensions.gone
-import com.example.core_android.extensions.visibile
+import com.youssefshamass.core_android.extensions.gone
+import com.youssefshamass.core_android.extensions.visibile
 import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.youssefshamass.core.extensions.observe
@@ -21,11 +21,11 @@ import android.app.Activity
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.core_android.decorators.HorizontalSpaceDecorator
-import com.example.core_android.decorators.VerticalSpaceItemDecoration
-import com.example.core_android.extensions.bindToList
+import com.youssefshamass.core_android.decorators.HorizontalSpaceDecorator
+import com.youssefshamass.core_android.decorators.VerticalSpaceItemDecoration
+import com.youssefshamass.core_android.extensions.bindToList
 import com.google.android.material.transition.platform.MaterialFadeThrough
-import com.youssefshamass.data.entities.local.User
+import com.youssefshamass.domain.entities.User
 import com.youssefshamass.safehub.R
 
 class HomeFragment : Fragment() {

@@ -12,5 +12,5 @@ interface FollowingDAO : IDAO<Following> {
     fun paging(forUserId: Int): PagingSource<Int, Following>
 
     @Query("DELETE FROM user_followings WHERE user_id = :forUserId")
-    fun clear(forUserId: Int)
+    fun clear(forUserId: Int): Int
 }

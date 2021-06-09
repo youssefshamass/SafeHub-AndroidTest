@@ -41,5 +41,6 @@ android {
 
 dependencies {
     api project(':domain')
+
     api libraries
 }

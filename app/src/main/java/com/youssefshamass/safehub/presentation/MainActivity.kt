@@ -2,8 +2,8 @@ package com.youssefshamass.safehub.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.core_android.extensions.binding
-import com.example.core_android.extensions.dataBinding
+import com.youssefshamass.core_android.extensions.binding
+import com.youssefshamass.core_android.extensions.dataBinding
 import com.youssefshamass.safehub.R
 import com.youssefshamass.safehub.databinding.ActivityMainBinding
 

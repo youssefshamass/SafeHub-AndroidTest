@@ -1,13 +1,13 @@
 package com.youssefshamass.safehub.presentation.home
 
 import androidx.lifecycle.viewModelScope
-import com.example.core_android.ReduxViewModel
+import com.youssefshamass.core_android.ReduxViewModel
 import com.youssefshamass.core.data.base.InvokeStatus
 import com.youssefshamass.core.errors.NotFoundError
 import com.youssefshamass.core.errors.RateLimitedError
 import com.youssefshamass.core.extensions.exhaustive
 import com.youssefshamass.core.utils.ViewStateBox
-import com.youssefshamass.data.entities.local.User
+import com.youssefshamass.domain.entities.User
 import com.youssefshamass.domain.users.ObservePreviousMatches
 import com.youssefshamass.domain.users.SearchUser
 import kotlinx.coroutines.launch

@@ -36,4 +36,7 @@ android {
 
 dependencies {
     api libraries
+
+    testImplementation testLibraries
+    androidTestImplementation testLibraries
 }

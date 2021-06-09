@@ -9,13 +9,13 @@ import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 
 abstract class ResultUseCase<in P, O> {
-    protected abstract suspend fun doWork(parameters: P?): O
+    protected abstract suspend fun doWork(parameters: P): O
 
-    fun execSync(parameters: P?): O = runBlocking {
+    fun execSync(parameters: P): O = runBlocking {
         doWork(parameters)
     }
 
-    operator fun invoke(parameters: P?): Flow<O> = flow {
+    operator fun invoke(parameters: P): Flow<O> = flow {
         try {
             emit(doWork(parameters))
         } catch (exception: Exception) {

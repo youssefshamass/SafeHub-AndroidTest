@@ -1,3 +1,13 @@
 apply from: '../dependencies.gradle'
 
 ext.libraries = []
+
+ext.testLibraries = [
+        "junit:junit:$junit_version",
+        "androidx.test.ext:junit-ktx:$junit_ktx_version",
+        "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version",
+        "org.mockito:mockito-core:$mockito_version",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version",
+        "androidx.test:runner:$test_version",
+        "androidx.test:rules:$test_version"
+]

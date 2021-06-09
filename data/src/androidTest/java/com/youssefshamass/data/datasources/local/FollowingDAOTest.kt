@@ -4,9 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.youssefshamass.core.utils.CoroutineTestRule
+import com.youssefshamass.core_test.utils.CoroutineTestRule
 import com.youssefshamass.data.db.ApplicationDatabase
-import com.youssefshamass.data.entities.local.Follower
 import com.youssefshamass.data.entities.local.Following
 import com.youssefshamass.data.entities.local.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi

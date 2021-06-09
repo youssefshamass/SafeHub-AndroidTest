@@ -1,4 +1,4 @@
-package com.youssefshamass.core.utils
+package com.youssefshamass.core_test.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

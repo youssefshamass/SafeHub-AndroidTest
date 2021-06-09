@@ -4,12 +4,9 @@ import com.nhaarman.mockitokotlin2.mock
 import com.youssefshamass.data.entities.local.User
 import com.youssefshamass.domain.users.ObservePreviousMatches
 import com.youssefshamass.domain.users.SearchUser
-import junit.framework.TestCase
-import org.junit.After
 import org.junit.Before
 
 class HomeViewModelTest {
-
     private val observePreviousMatchesUseCase = mock<ObservePreviousMatches>()
     private val searchUserUseCase = mock<SearchUser>()
 
